@@ -3,7 +3,7 @@ import { ref } from 'vue';
 </script>
 
 <template>
-    <footer class="fixed bottom-0 left-0 w-full bg-gray-800 text-white">
+    <footer class="bg-gray-800 text-white">
         <div class="container mx-auto text-center">
             <p>&copy; 2023 Your Company. All rights reserved.</p>
             <div class="mt-2">

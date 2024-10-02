@@ -7,10 +7,10 @@ import Navbar from './components/Navbar.vue';
 
 <template>
   <Navbar />
-  <div class="bg-background-image flex flex-col items-center justify-center h-screen text-white">
+  <div class="flex flex-col items-center justify-center h-screen text-white bg-red-400">
     <Header />
   </div>
-  <Footer />
+  <Footer class="fixed w-full bottom-0 left-0"/>
 </template>
 
 <style scoped>
