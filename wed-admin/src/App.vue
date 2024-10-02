@@ -1,16 +1,16 @@
 <script setup>
 import { ref } from 'vue';
-import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 import Navbar from './components/Navbar.vue';
 </script>
 
 <template>
   <Navbar />
-  <div class="flex flex-col items-center justify-center h-screen text-white bg-red-400">
-    <Header />
+  <div class="container mx-auto h-screen">
+    <h1 class="text-3xl font-semibold mt-10">Welcome to MyApp</h1>
+    <p class="mt-4">This is a simple Vue 3 application with Vite.</p>
   </div>
-  <Footer class="fixed w-full bottom-0 left-0"/>
+  <Footer />
 </template>
 
 <style scoped>
