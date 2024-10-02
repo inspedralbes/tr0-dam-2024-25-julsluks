@@ -6,11 +6,11 @@ import Navbar from './components/Navbar.vue';
 </script>
 
 <template>
+  <Navbar />
   <div class="bg-background-image flex flex-col items-center justify-center h-screen text-white">
-    <Navbar />
     <Header />
-    <Footer />
   </div>
+  <Footer />
 </template>
 
 <style scoped>
