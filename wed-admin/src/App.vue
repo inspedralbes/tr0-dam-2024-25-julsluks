@@ -6,11 +6,11 @@ import Navbar from './components/Navbar.vue';
 
 <template>
   <Navbar />
-  <div class="container mx-auto h-screen">
+  <!-- <div class="container mx-auto h-screen">
     <h1 class="text-3xl font-semibold mt-10">Welcome to MyApp</h1>
     <p class="mt-4">This is a simple Vue 3 application with Vite.</p>
   </div>
-  <Footer />
+  <Footer /> -->
 </template>
 
 <style scoped>
