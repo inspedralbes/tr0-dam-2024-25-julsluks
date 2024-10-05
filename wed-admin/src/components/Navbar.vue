@@ -47,18 +47,18 @@ function toggleQuestions() {
     showQuestions.value = !showQuestions.value;
     if (showQuestions.value) {
         showStatistics.value = false;
+        emit('response', { showQuestions: showQuestions.value, showStatistics: showStatistics.value });
     }
     console.log('Show Questions', showQuestions.value);
-    emit('response', { showQuestions: showQuestions.value, showStatistics: showStatistics.value });
 }
 
 function toggleStatistics() {
     showStatistics.value = !showStatistics.value;
     if (showStatistics.value) {
         showQuestions.value = false;
+        emit('response', { showQuestions: showQuestions.value, showStatistics: showStatistics.value });
     }
     console.log('Show Statistics', showStatistics.value);
-    emit('response', { showQuestions: showQuestions.value, showStatistics: showStatistics.value });
 }
 
 </script>
