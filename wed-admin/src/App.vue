@@ -48,7 +48,7 @@ import { ref } from 'vue';
 import Navbar from './components/Navbar.vue';
 import Questions from './components/Questions.vue';
 import Statistics from './components/Statistics.vue';
-import { createQuestion } from '../communicationManager.js';
+import { createQuestion } from './communicationManager.js';
 
 
 const showQuestions = ref(false);

@@ -12,13 +12,13 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-let items = [];
+let questions = [];
 
 // Create
-app.post('/items', (req, res) => {
-    const item = req.body;
-    items.push(item);
-    res.status(201).send(item);
+app.post('/questions', (req, res) => {
+    const question = req.body;
+    questions.push(question);
+    res.status(201).send(question);
 });
 
 // Read
