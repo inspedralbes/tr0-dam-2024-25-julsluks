@@ -48,6 +48,8 @@ import { ref } from 'vue';
 import Navbar from './components/Navbar.vue';
 import Questions from './components/Questions.vue';
 import Statistics from './components/Statistics.vue';
+import { createQuestion } from '../communicationManager.js';
+
 
 const showQuestions = ref(false);
 const showStatistics = ref(false);
@@ -75,6 +77,12 @@ function clearValues() {
     answer.answer = "";
   });
   newQuestion.value.image = "";
+
+  console.log(newQuestion.value);
+  console.log(newQuestion.value.answers[0].answer);
+  console.log(newQuestion.value.answers[1].answer);
+  console.log(newQuestion.value.answers[2].answer);
+  console.log(newQuestion.value.answers[3].answer);
 }
 
 function sendQuestion() {

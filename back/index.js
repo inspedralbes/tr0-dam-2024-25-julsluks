@@ -1,9 +1,16 @@
 const express = require('express');
+const cors = require('cors');
+const { v4: uuidv4, validate } = require('uuid');
+const { isUuid } = require('uuidv4');
+const { spawn } = require('child_process');
+const fs = require('fs');
+const jsonQuestions = require('./data/questions.json');
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(cors());
 
 let items = [];
 
@@ -15,8 +22,8 @@ app.post('/items', (req, res) => {
 });
 
 // Read
-app.get('/items', (req, res) => {
-    res.send(items);
+app.get('/questions', (req, res) => {
+    res.send(jsonQuestions.questions);
 });
 
 app.get('/items/:id', (req, res) => {
