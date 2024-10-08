@@ -4,7 +4,9 @@
 
         <div id="accordion-open" data-accordion="open">
             <div v-for="(question, index) in callFindAllQuestions" :key="index" class="mb-4">
-                
+                <h2 :id="'accordion-open-heading-' + index">
+                    
+                </h2>
             </div>
             <!-- <div v-for="(item, index) in accordionItems" :key="index" class="mb-4">
                 <h2 :id="'accordion-open-heading-' + index">
