@@ -42,12 +42,12 @@ app.put('/items/:id', (req, res) => {
 });
 
 // Delete
-app.delete('/items/:id', (req, res) => {
-    const itemIndex = items.findIndex(i => i.id === parseInt(req.params.id));
-    if (itemIndex === -1) return res.status(404).send('Item not found');
+app.delete('/questions/:id', (req, res) => {
+    const questionIndex = questions.findIndex(question => question.id === parseInt(req.params.id));
+    if (questionIndex === -1) return res.status(404).send('Item not found');
 
-    const deletedItem = items.splice(itemIndex, 1);
-    res.send(deletedItem);
+    const deletedQuestion = items.splice(questionIndex, 1);
+    res.send(deletedQuestion);
 });
 
 app.listen(port, () => {
