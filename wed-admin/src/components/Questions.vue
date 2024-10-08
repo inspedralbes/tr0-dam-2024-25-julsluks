@@ -5,6 +5,7 @@
         <div id="accordion-open" data-accordion="open">
             <div v-for="(question, index) in callFindAllQuestions" :key="index" class="mb-4">
                 <h2 :id="'accordion-open-heading-' + index">
+                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" 
                     
                 </h2>
             </div>
