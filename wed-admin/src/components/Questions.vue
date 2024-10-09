@@ -32,7 +32,7 @@
                             <li v-for="(answer, index) in question.answers" class="p-2" :class="answer.correct == true ? 'text-green-600' : 'text-red-600'">({{ answer.correct }}) {{ answer.answer }}</li>
                         </ul>
                         <div class="flex flex-col justify-center items-center space-y-4">
-                            <button class="bg-red-700/40 text-white px-3 py-1 rounded-lg text-lg hover:shadow hover:bg-red-700/70">Delete</button>
+                            <button @click="deleteButton(question.id)" class="bg-red-700/40 text-white px-3 py-1 rounded-lg text-lg hover:shadow hover:bg-red-700/70">Delete</button>
                             <button class="bg-yellow-300/50 text-white px-3 py-1 rounded-lg text-lg hover:shadow hover:bg-yellow-300/80">Update</button>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { findAllQuestions } from '../communicationManager.js';
+import { findAllQuestions, deleteQuestion } from '../communicationManager.js';
 
 console.log('Questions Component Loaded');
 
@@ -66,6 +66,11 @@ onMounted(loadQuestions);
 const toggleAccordion = (index) => {
     openAccordions.value[index] = !openAccordions.value[index];
 };
+
+function deleteButton(id) {
+    deleteQuestion(id);
+    loadQuestions();
+}
 </script>
 
 <style scoped>

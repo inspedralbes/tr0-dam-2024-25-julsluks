@@ -1,11 +1,13 @@
 const URL = 'http://localhost:3000';
 
+//Read all (OKAY)
 export async function findAllQuestions() {
     const response = await fetch(`${URL}/questions`);
     let data = await response.json();
     return data;
 }
 
+//Create (OKAY)
 export async function createQuestion(question) {
     const response = await fetch(`${URL}/questions`, {
         method: 'POST',
@@ -30,6 +32,7 @@ export async function updateQuestion(question) {
     return data;
 }
 
+//Delete (not OKAY)
 export async function deleteQuestion(id) {
     const response = await fetch(`${URL}/questions/${id}`, {
         method: 'DELETE'
