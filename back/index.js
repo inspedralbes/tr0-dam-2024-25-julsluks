@@ -14,53 +14,59 @@ app.use(cors());
 
 let questions = [];
 
-// Create
+// Create (OKAY)
 app.post('/questions', (req, res) => {
     const question = req.body;
-    if (!question.question || !question.answers || question.answers.length < 4 || !question.image)  {
-        res.status(400).send('Falten dades o no són correctes');
+    if (!question.question || !question.answers || question.answers.length < 4 || !question.image) {
+        res.status(400).send('Data is missing or incorrect');
     } else {
-        jsonQuestions.questions.push({ 
-            "id": jsonQuestions.questions[jsonQuestions.questions.length - 1].id + 1, 
-            "question": question.question, 
+        jsonQuestions.questions.push({
+            "id": jsonQuestions.questions[jsonQuestions.questions.length - 1].id + 1,
+            "question": question.question,
             "answers": question.answers,
             "image": question.image
         });
         fs.writeFileSync('./data/questions.json', JSON.stringify(jsonQuestions));
-        res.status(201).send('Pregunta afegida');
+        res.status(201).send('Added question');
     }
     questions.push(question);
     res.status(201).send(question);
 });
 
-// Read all
+// Read all (OKAY)
 app.get('/questions', (req, res) => {
     res.send(jsonQuestions.questions);
 });
 
-// Read one
-app.get('/items/:id', (req, res) => {
-    const item = items.find(i => i.id === parseInt(req.params.id));
-    if (!item) return res.status(404).send('Item not found');
-    res.send(item);
+// Update (OKAY)
+app.put('/questions/:id', (req, res) => {
+    const questionIndex = jsonQuestions.questions.findIndex(question => question.id == parseInt(req.params.id));
+    const updateQuestion = req.body;
+    if (!questionIndex) {
+        return res.status(404).send('Question not found');
+    } else {
+        if (!updateQuestion.question || !updateQuestion.answers || updateQuestion.answers.length < 4 || !updateQuestion.image) {
+            res.status(400).send('Data is missing or incorrect');
+        } else {
+            jsonQuestions.questions[questionIndex] = {
+                "id": parseInt(req.params.id),
+                "question": updateQuestion.question,
+                "answers": updateQuestion.answers,
+                "image": updateQuestion.image
+            };
+            fs.writeFileSync('./data/questions.json', JSON.stringify(jsonQuestions));
+            res.status(201).send('Updated question');
+        }
+    }
 });
 
-// Update
-app.put('/items/:id', (req, res) => {
-    const item = items.find(i => i.id === parseInt(req.params.id));
-    if (!item) return res.status(404).send('Item not found');
-
-    Object.assign(item, req.body);
-    res.send(item);
-});
-
-// Delete
+// Delete (OKAY)
 app.delete('/questions/:id', (req, res) => {
-    const questionIndex = parseInt(req.params.id);
+    const questionIndex = jsonQuestions.questions.findIndex(question => question.id == parseInt(req.params.id));
     if (questionIndex === -1) {
         return res.status(404).send('Question not found');
     } else {
-        jsonQuestions.splice(questionIndex, 1);
+        jsonQuestions.questions.splice(questionIndex, 1);
         fs.writeFileSync('./data/questions.json', JSON.stringify(jsonQuestions));
         res.send('Question deleted');
     }

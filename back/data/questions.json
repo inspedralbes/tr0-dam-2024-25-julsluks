@@ -674,33 +674,6 @@
                 }
             ],
             "image": "https://www.blogacine.com/wp-content/uploads/2020/08/psycho_alfred_hitchcock-scaled.jpg"
-        },
-        {
-            "id": 26,
-            "question": "aaaa",
-            "answers": [
-                {
-                    "id": 1,
-                    "answer": "1a",
-                    "correct": false
-                },
-                {
-                    "id": 2,
-                    "answer": "2n",
-                    "correct": false
-                },
-                {
-                    "id": 3,
-                    "answer": "3r",
-                    "correct": true
-                },
-                {
-                    "id": 4,
-                    "answer": "4t",
-                    "correct": false
-                }
-            ],
-            "image": "blablabla"
         }
     ]
 }
