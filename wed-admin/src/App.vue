@@ -55,15 +55,15 @@ const showQuestions = ref(false);
 const showStatistics = ref(false);
 
 const newQuestion = ref({
-  id: 0,
-  question: "",
-  answers: [
-    { id: 1, answer: "", correct: false },
-    { id: 2, answer: "", correct: false },
-    { id: 3, answer: "", correct: false },
-    { id: 4, answer: "", correct: false }
+  "id": 0,
+  "question": "",
+  "answers": [
+    { "id": 1, "answer": "", "correct": false },
+    { "id": 2, "answer": "", "correct": false },
+    { "id": 3, "answer": "", "correct": false },
+    { "id": 4, "answer": "", "correct": false }
   ],
-  image: ""
+  "image": ""
 });
 
 const showPage = ref({

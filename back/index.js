@@ -17,15 +17,28 @@ let questions = [];
 // Create
 app.post('/questions', (req, res) => {
     const question = req.body;
+    if (!question.question || !question.answers || question.answers.length < 4 || !question.image)  {
+        res.status(400).send('Falten dades o no són correctes');
+    } else {
+        jsonQuestions.questions.push({ 
+            "id": jsonQuestions.questions[jsonQuestions.questions.length - 1].id + 1, 
+            "question": question.question, 
+            "answers": question.answers,
+            "image": question.image
+        });
+        fs.writeFileSync('./data/questions.json', JSON.stringify(jsonQuestions));
+        res.status(201).send('Pregunta afegida');
+    }
     questions.push(question);
     res.status(201).send(question);
 });
 
-// Read
+// Read all
 app.get('/questions', (req, res) => {
     res.send(jsonQuestions.questions);
 });
 
+// Read one
 app.get('/items/:id', (req, res) => {
     const item = items.find(i => i.id === parseInt(req.params.id));
     if (!item) return res.status(404).send('Item not found');
@@ -43,11 +56,14 @@ app.put('/items/:id', (req, res) => {
 
 // Delete
 app.delete('/questions/:id', (req, res) => {
-    const questionIndex = questions.findIndex(question => question.id === parseInt(req.params.id));
-    if (questionIndex === -1) return res.status(404).send('Item not found');
-
-    const deletedQuestion = items.splice(questionIndex, 1);
-    res.send(deletedQuestion);
+    const questionIndex = parseInt(req.params.id);
+    if (questionIndex === -1) {
+        return res.status(404).send('Question not found');
+    } else {
+        jsonQuestions.splice(questionIndex, 1);
+        fs.writeFileSync('./data/questions.json', JSON.stringify(jsonQuestions));
+        res.send('Question deleted');
+    }
 });
 
 app.listen(port, () => {
