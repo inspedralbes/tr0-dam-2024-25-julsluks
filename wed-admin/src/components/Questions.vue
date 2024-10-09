@@ -67,9 +67,9 @@ const toggleAccordion = (index) => {
     openAccordions.value[index] = !openAccordions.value[index];
 };
 
-function deleteButton(id) {
-    deleteQuestion(id);
-    loadQuestions();
+const deleteButton = async (id) => {
+    await deleteQuestion(id);
+    questions.value = await findAllQuestions();
 }
 </script>
 
