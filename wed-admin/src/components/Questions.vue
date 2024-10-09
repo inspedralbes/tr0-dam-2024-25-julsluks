@@ -4,7 +4,7 @@
         <div id="accordion-open" data-accordion="open">
             <div v-for="(question, index) in questions" :key="index">
                 <h2 :id="'accordion-open-heading-' + index">
-                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" 
+                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 hover:bg-gray-100 gap-3" 
                     @click="toggleAccordion(index)" :aria-expanded="openAccordions[index]"
                         :aria-controls="'accordion-open-body-' + index">
                         <span class="flex items-center">
@@ -24,10 +24,10 @@
                     </button>
                 </h2>
                 <div v-show="openAccordions[index]" :id="'accordion-open-body-' + index"
-                    class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900"
+                    class="p-5 border border-b-0 border-gray-200"
                     :aria-labelledby="'accordion-open-heading-' + index">
-                    <div class="flex flex-inline justify-center items-center space-x-20">
-                        <img :src="question.image" class="size-1/4 rounded-lg border"/>
+                    <div class="grid grid-cols-3 gap-1 items-center max-w-[678px]">
+                        <img :src="question.image" class="rounded-lg border"/>
                         <ul>
                             <li v-for="(answer, index) in question.answers" class="p-2" :class="answer.correct == true ? 'text-green-600' : 'text-red-600'">({{ answer.correct }}) {{ answer.answer }}</li>
                         </ul>
@@ -48,29 +48,25 @@ import { findAllQuestions } from '../communicationManager.js';
 
 console.log('Questions Component Loaded');
 
-// Estado de las preguntas y acordeones
 const questions = ref([]);
 const openAccordions = ref([]);
 
-// Función para cargar las preguntas y configurar acordeones
 const loadQuestions = async () => {
     try {
         const response = await findAllQuestions();
-        questions.value = response; // Almacena las preguntas obtenidas
-        // Inicializa el estado de los acordeones (cerrados por defecto)
+        questions.value = response; 
         openAccordions.value = response.map(() => false);
     } catch (error) {
         console.error('Error fetching questions:', error);
     }
 };
 
-// Llamada para cargar preguntas al montar el componente
 onMounted(loadQuestions);
 
-// Alternar el estado de un acordeón
 const toggleAccordion = (index) => {
     openAccordions.value[index] = !openAccordions.value[index];
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>
