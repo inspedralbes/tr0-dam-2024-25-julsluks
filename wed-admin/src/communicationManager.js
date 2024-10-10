@@ -32,11 +32,14 @@ export async function updateQuestion(question) {
     return data;
 }
 
-//Delete (not OKAY)
+//Delete (OKAY)
 export async function deleteQuestion(id) {
     const response = await fetch(`${URL}/questions/${id}`, {
         method: 'DELETE'
     });
-    let data = await response.json();
-    return data;
+    if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+    }
+    const textResponse = await response.text(); // Obtener respuesta como texto
+    return textResponse;
 }

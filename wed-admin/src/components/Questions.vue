@@ -48,14 +48,14 @@ import { findAllQuestions, deleteQuestion } from '../communicationManager.js';
 
 console.log('Questions Component Loaded');
 
-const questions = ref([]);
+const questions = ref([]); // Corregido para usar ref
 const openAccordions = ref([]);
 
 const loadQuestions = async () => {
     try {
         const response = await findAllQuestions();
-        questions.value = response; 
-        openAccordions.value = response.map(() => false);
+        questions.value = response; // Asigna correctamente a la referencia 'questions'
+        openAccordions.value = response.map(() => false); // Resetea el estado de los acordeones
     } catch (error) {
         console.error('Error fetching questions:', error);
     }
@@ -68,9 +68,15 @@ const toggleAccordion = (index) => {
 };
 
 const deleteButton = async (id) => {
-    await deleteQuestion(id);
-    questions.value = await findAllQuestions();
-}
+    try {
+        const message = await deleteQuestion(id); // Llama a la función de eliminación
+        console.log(message); // Muestra el mensaje de éxito
+        await loadQuestions(); // Recarga las preguntas después de la eliminación
+    } catch (error) {
+        console.error('Error deleting question:', error);
+    }
+};
+
 </script>
 
 <style scoped>
