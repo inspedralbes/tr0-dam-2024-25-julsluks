@@ -42,8 +42,8 @@ app.get('/questions', (req, res) => {
 app.put('/questions/:id', (req, res) => {
     const questionIndex = jsonQuestions.questions.findIndex(question => question.id == parseInt(req.params.id));
     const updateQuestion = req.body;
-    if (!questionIndex) {
-        return res.status(404).send('Question not found');
+    if (questionIndex === -1) {
+        res.status(404).send('Question not found');
     } else {
         if (!updateQuestion.question || !updateQuestion.answers || updateQuestion.answers.length < 4 || !updateQuestion.image) {
             res.status(400).send('Data is missing or incorrect');

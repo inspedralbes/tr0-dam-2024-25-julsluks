@@ -20,6 +20,7 @@ export async function createQuestion(question) {
     return data;
 }
 
+//Update (OKAY)
 export async function updateQuestion(question) {
     const response = await fetch(`${URL}/questions/${question.id}`, {
         method: 'PUT',
@@ -28,8 +29,8 @@ export async function updateQuestion(question) {
         },
         body: JSON.stringify(question)
     });
-    let data = await response.json();
-    return data;
+    const text = await response.text();
+    return text;
 }
 
 //Delete (OKAY)
