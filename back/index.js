@@ -14,6 +14,7 @@ app.use(cors());
 
 let questions = [];
 
+//CRUD Questions
 // Create (OKAY)
 app.post('/questions', (req, res) => {
     const question = req.body;
@@ -72,6 +73,39 @@ app.delete('/questions/:id', (req, res) => {
     }
 });
 
+//Game logic
+// Start game
+app.get('/game', (req, res) => {
+    let gameQuestions = {};
+    const sessionToken = getSessionToken(req.body.sessionToken);
+
+    const shuffledQuestions = jsonQuestions.questions.sort(() => 0.5 - Math.random());
+    gameQuestions = shuffledQuestions.slice(0, 10);
+
+    res.send({
+        sessionToken: sessionToken,
+        questions: gameQuestions
+    });
+});
+
+// End game
+app.post('/game', (req, res) => {
+    const sessionToken = req.body.sessionToken;
+    const gameQuestions = req.body.questions;
+    const resultsGame = req.body.results;
+
+    
+
+});
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
+function getSessionToken (token) {
+    if (token) {
+        return token;
+    } else {
+        return uuidv4();
+    }
+}
