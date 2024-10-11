@@ -76,11 +76,27 @@ app.delete('/questions/:id', (req, res) => {
 //Game logic
 // Start game
 app.get('/game', (req, res) => {
-    let gameQuestions = {};
+    let gameQuestions = [];
     const sessionToken = getSessionToken(req.body.sessionToken);
 
     const shuffledQuestions = jsonQuestions.questions.sort(() => 0.5 - Math.random());
-    gameQuestions = shuffledQuestions.slice(0, 10);
+    const tenQuestions = shuffledQuestions.slice(0, 10);
+
+    for (let i = 0; i < tenQuestions.length; i++) {
+        gameQuestions[i] = {
+            "id": tenQuestions[i].id,
+            "question": tenQuestions[i].question,
+            "answers": [],
+            "image": tenQuestions[i].image
+        };
+        for (let j = 0; j < tenQuestions[i].answers.length; j++) {
+            gameQuestions[i].answers[j] = {
+                "answer": tenQuestions[i].answers[j].answer
+            };
+        }
+    }
+
+    console.log(gameQuestions);
 
     res.send({
         sessionToken: sessionToken,
@@ -92,10 +108,8 @@ app.get('/game', (req, res) => {
 app.post('/game', (req, res) => {
     const sessionToken = req.body.sessionToken;
     const gameQuestions = req.body.questions;
-    const resultsGame = req.body.results;
 
     
-
 });
 
 app.listen(port, () => {
