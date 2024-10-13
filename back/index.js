@@ -5,6 +5,7 @@ const { isUuid } = require('uuidv4');
 const { spawn } = require('child_process');
 const fs = require('fs');
 const jsonQuestions = require('./data/questions.json');
+const e = require('express');
 
 const app = express();
 const port = 3000;
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 let questions = [];
+const gameSessions = [];
 
 //CRUD Questions
 // Create (OKAY)
@@ -91,12 +93,20 @@ app.get('/game', (req, res) => {
         };
         for (let j = 0; j < tenQuestions[i].answers.length; j++) {
             gameQuestions[i].answers[j] = {
+                "id": tenQuestions[i].answers[j].id,
                 "answer": tenQuestions[i].answers[j].answer
             };
         }
     }
 
-    console.log(gameQuestions);
+    console.log("Las diez preguntas guardadas en servidor:");
+    console.log(tenQuestions[0].answers[0]);
+    // console.log(gameQuestions);
+
+    gameSessions.push({
+        "sessionToken": sessionToken,
+        "questions": tenQuestions
+    });
 
     res.send({
         sessionToken: sessionToken,
@@ -108,8 +118,39 @@ app.get('/game', (req, res) => {
 app.post('/game', (req, res) => {
     const sessionToken = req.body.sessionToken;
     const gameQuestions = req.body.questions;
+    const clientGameAnswers = req.body.answers;
 
-    
+    let correctAnswers = 0;
+    let incorrectAnswers = 0;
+
+    const sessionIndex = gameSessions.findIndex(session => session.sessionToken == sessionToken);
+
+    if (!sessionToken || !gameQuestions || sessionIndex === -1 || gameSessions[sessionIndex].questions.length != gameQuestions.length || !clientGameAnswers || clientGameAnswers.length != gameQuestions.length) {
+        return res.status(400).send('Data is missing or incorrect');
+    } else {
+        console.log('Comienza la comprobación');
+        
+        for (let i = 0; i < gameSessions[sessionIndex].questions.length; i++) {
+            for (let j = 0; j < gameSessions[sessionIndex].questions[i].answers.length; j++) {
+                if (gameSessions[sessionIndex].questions[i].answers[j].correct == true) {
+                    if (clientGameAnswers[i].answer == gameSessions[sessionIndex].questions[i].answers[j].id) {
+                        correctAnswers++;
+                    } else {
+                        incorrectAnswers++;
+                    }
+                }
+            }
+        }
+
+        createJsonStatistics(correctAnswers, incorrectAnswers, clientGameAnswers, gameSessions[sessionIndex].questions);
+    }
+
+    gameSessions.splice(sessionIndex, 1);
+
+    res.send({
+        correctAnswers: correctAnswers,
+        incorrectAnswers: incorrectAnswers
+    });
 });
 
 app.listen(port, () => {
@@ -122,4 +163,66 @@ function getSessionToken (token) {
     } else {
         return uuidv4();
     }
+}
+
+function createJsonStatistics (correctAnswers, incorrectAnswers, clientGameAnswers, serverGameQuestions) {
+    const date = new Date();
+    const dateString = `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
+    const dir = `./data/${dateString}`;
+    const statistics = {
+        "totalData": {
+            "date": dateString,
+            "totalGames": 0,
+            "correctAnswers": correctAnswers,
+            "incorrectAnswers": incorrectAnswers
+        },
+        questionsStatistics: []
+    };
+
+    console.log('Estadísticas:' + dir);   
+
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+        fs.writeFileSync(`${dir}/statistics.json`, JSON.stringify(statistics));
+    }
+
+    let existentFile = fs.readFileSync(`${dir}/statistics.json`);
+    existentFile = JSON.parse(existentFile);
+
+    console.log('Estadísticas:' + existentFile);
+
+    existentFile.totalData.totalGames++;
+    for (let i = 0; i < serverGameQuestions.length; i++) {
+        for (let j = 0; j < serverGameQuestions[i].answers.length; j++) {
+            if (serverGameQuestions[i].answers[j].id == clientGameAnswers[i].answer) {
+                if (serverGameQuestions[i].answers[j].correct) {
+                    if (existentFile.questionsStatistics.length == 0 || existentFile.questionsStatistics.findIndex(question => question.id == serverGameQuestions[i].id) === -1) {
+                        existentFile.questionsStatistics.push({
+                            "id": serverGameQuestions[i].id,
+                            "attempts": 1,
+                            "correctAnswers": 1,
+                            "incorrectAnswers": 0
+                        });
+                    } else {
+                        existentFile.questionsStatistics.find(question => question.id == serverGameQuestions[i].id).attempts++;
+                        existentFile.questionsStatistics.find(question => question.id == serverGameQuestions[i].id).correctAnswers++;
+                    }
+                } else {
+                    if (existentFile.questionsStatistics.length == 0 || existentFile.questionsStatistics.findIndex(question => question.id == serverGameQuestions[i].id) === -1) {
+                        existentFile.questionsStatistics.push({
+                            "id": serverGameQuestions[i].id,
+                            "attempts": 1,
+                            "correctAnswers": 0,
+                            "incorrectAnswers": 1
+                        });
+                    } else {
+                        existentFile.questionsStatistics.find(question => question.id == serverGameQuestions[i].id).attempts++;
+                        existentFile.questionsStatistics.find(question => question.id == serverGameQuestions[i].id).incorrectAnswers++;
+                    }
+                }
+            }
+        }
+    }
+
+    fs.writeFileSync(`${dir}/statistics.json`, JSON.stringify(existentFile));
 }

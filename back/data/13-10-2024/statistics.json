@@ -1,0 +1,106 @@
+{
+    "totalData": {
+        "date": "13-10-2024",
+        "totalGames": 2,
+        "correctAnswers": 7,
+        "incorrectAnswers": 3
+    },
+    "questionsStatistics": [
+        {
+            "id": 1,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1
+        },
+        {
+            "id": 17,
+            "attempts": 2,
+            "correctAnswers": 0,
+            "incorrectAnswers": 2
+        },
+        {
+            "id": 12,
+            "attempts": 2,
+            "correctAnswers": 1,
+            "incorrectAnswers": 1
+        },
+        {
+            "id": 23,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1
+        },
+        {
+            "id": 2,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1
+        },
+        {
+            "id": 6,
+            "attempts": 1,
+            "correctAnswers": 1,
+            "incorrectAnswers": 0
+        },
+        {
+            "id": 3,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1
+        },
+        {
+            "id": 4,
+            "attempts": 2,
+            "correctAnswers": 0,
+            "incorrectAnswers": 2
+        },
+        {
+            "id": 18,
+            "attempts": 2,
+            "correctAnswers": 1,
+            "incorrectAnswers": 1
+        },
+        {
+            "id": 15,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1
+        },
+        {
+            "id": 13,
+            "attempts": 1,
+            "correctAnswers": 1,
+            "incorrectAnswers": 0
+        },
+        {
+            "id": 24,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1
+        },
+        {
+            "id": 25,
+            "attempts": 1,
+            "correctAnswers": 1,
+            "incorrectAnswers": 0
+        },
+        {
+            "id": 10,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1
+        },
+        {
+            "id": 19,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1
+        },
+        {
+            "id": 11,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1
+        }
+    ]
+}
