@@ -153,6 +153,16 @@ app.post('/game', (req, res) => {
     });
 });
 
+// Get statistics
+app.get('/statistics', (req, res) => {
+    console.log('Estadísticas');
+    const process = spawn('python', ['../python/statistics.py']);
+    process.stdout.on('data', data => {
+        console.log(data.toString());
+        res.send(data.toString());
+    });
+});
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
@@ -193,33 +203,38 @@ function createJsonStatistics (correctAnswers, incorrectAnswers, clientGameAnswe
 
     existentFile.totalData.totalGames++;
     for (let i = 0; i < serverGameQuestions.length; i++) {
-        for (let j = 0; j < serverGameQuestions[i].answers.length; j++) {
-            if (serverGameQuestions[i].answers[j].id == clientGameAnswers[i].answer) {
-                if (serverGameQuestions[i].answers[j].correct) {
-                    if (existentFile.questionsStatistics.length == 0 || existentFile.questionsStatistics.findIndex(question => question.id == serverGameQuestions[i].id) === -1) {
-                        existentFile.questionsStatistics.push({
-                            "id": serverGameQuestions[i].id,
-                            "attempts": 1,
-                            "correctAnswers": 1,
-                            "incorrectAnswers": 0
-                        });
-                    } else {
-                        existentFile.questionsStatistics.find(question => question.id == serverGameQuestions[i].id).attempts++;
-                        existentFile.questionsStatistics.find(question => question.id == serverGameQuestions[i].id).correctAnswers++;
-                    }
-                } else {
-                    if (existentFile.questionsStatistics.length == 0 || existentFile.questionsStatistics.findIndex(question => question.id == serverGameQuestions[i].id) === -1) {
-                        existentFile.questionsStatistics.push({
-                            "id": serverGameQuestions[i].id,
-                            "attempts": 1,
-                            "correctAnswers": 0,
-                            "incorrectAnswers": 1
-                        });
-                    } else {
-                        existentFile.questionsStatistics.find(question => question.id == serverGameQuestions[i].id).attempts++;
-                        existentFile.questionsStatistics.find(question => question.id == serverGameQuestions[i].id).incorrectAnswers++;
-                    }
-                }
+        const questionId = serverGameQuestions[i].id;
+        let questionStats = existentFile.questionsStatistics.find(q => q.id == questionId);
+
+        if (!questionStats) {
+            questionStats = {
+                id: questionId,
+                attempts: 0,
+                correctAnswers: 0,
+                incorrectAnswers: 0,
+                answers: serverGameQuestions[i].answers.map(answer => ({
+                    text: answer.answer,
+                    selected: 0 
+                }))
+            };
+            existentFile.questionsStatistics.push(questionStats);
+        }
+
+        questionStats.attempts++;
+
+        const clientAnswerId = clientGameAnswers[i].answer;
+        const selectedAnswer = serverGameQuestions[i].answers.find(a => a.id == clientAnswerId);
+    
+        if (selectedAnswer) {
+            if (selectedAnswer.correct) {
+                questionStats.correctAnswers++;
+            } else {
+                questionStats.incorrectAnswers++;
+            }
+
+            let answerStats = questionStats.answers.find(a => a.text === selectedAnswer.answer);
+            if (answerStats) {
+                answerStats.selected++;
             }
         }
     }

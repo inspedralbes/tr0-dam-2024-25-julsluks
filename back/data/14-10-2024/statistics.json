@@ -1,0 +1,250 @@
+{
+    "totalData": {
+        "date": "14-10-2024",
+        "totalGames": 1,
+        "correctAnswers": 2,
+        "incorrectAnswers": 8
+    },
+    "questionsStatistics": [
+        {
+            "id": 20,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1,
+            "answers": [
+                {
+                    "text": "Triceratops",
+                    "selected": 1
+                },
+                {
+                    "text": "Velociraptor",
+                    "selected": 0
+                },
+                {
+                    "text": "Tyrannosaurus Rex",
+                    "selected": 0
+                },
+                {
+                    "text": "Stegosaurus",
+                    "selected": 0
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "attempts": 1,
+            "correctAnswers": 1,
+            "incorrectAnswers": 0,
+            "answers": [
+                {
+                    "text": "Robots",
+                    "selected": 0
+                },
+                {
+                    "text": "WALL-E",
+                    "selected": 1
+                },
+                {
+                    "text": "The Iron Giant",
+                    "selected": 0
+                },
+                {
+                    "text": "Big Hero 6",
+                    "selected": 0
+                }
+            ]
+        },
+        {
+            "id": 23,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1,
+            "answers": [
+                {
+                    "text": "Emma Stone",
+                    "selected": 0
+                },
+                {
+                    "text": "Emma Watson",
+                    "selected": 0
+                },
+                {
+                    "text": "Keira Knightley",
+                    "selected": 1
+                },
+                {
+                    "text": "Natalie Portman",
+                    "selected": 0
+                }
+            ]
+        },
+        {
+            "id": 25,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1,
+            "answers": [
+                {
+                    "text": "Psycho",
+                    "selected": 0
+                },
+                {
+                    "text": "The Shining",
+                    "selected": 0
+                },
+                {
+                    "text": "A Nightmare on Elm Street",
+                    "selected": 0
+                },
+                {
+                    "text": "Halloween",
+                    "selected": 1
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1,
+            "answers": [
+                {
+                    "text": "Christopher Nolan",
+                    "selected": 0
+                },
+                {
+                    "text": "James Cameron",
+                    "selected": 1
+                },
+                {
+                    "text": "Ridley Scott",
+                    "selected": 0
+                },
+                {
+                    "text": "Michael Bay",
+                    "selected": 0
+                }
+            ]
+        },
+        {
+            "id": 22,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1,
+            "answers": [
+                {
+                    "text": "Finding Nemo",
+                    "selected": 0
+                },
+                {
+                    "text": "Shark Tale",
+                    "selected": 1
+                },
+                {
+                    "text": "The Little Mermaid",
+                    "selected": 0
+                },
+                {
+                    "text": "Moana",
+                    "selected": 0
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1,
+            "answers": [
+                {
+                    "text": "2000",
+                    "selected": 0
+                },
+                {
+                    "text": "2001",
+                    "selected": 0
+                },
+                {
+                    "text": "2002",
+                    "selected": 1
+                },
+                {
+                    "text": "1999",
+                    "selected": 0
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1,
+            "answers": [
+                {
+                    "text": "Martin Scorsese",
+                    "selected": 1
+                },
+                {
+                    "text": "Quentin Tarantino",
+                    "selected": 0
+                },
+                {
+                    "text": "Steven Spielberg",
+                    "selected": 0
+                },
+                {
+                    "text": "David Fincher",
+                    "selected": 0
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "attempts": 1,
+            "correctAnswers": 1,
+            "incorrectAnswers": 0,
+            "answers": [
+                {
+                    "text": "12 Angry Men",
+                    "selected": 0
+                },
+                {
+                    "text": "To Kill a Mockingbird",
+                    "selected": 1
+                },
+                {
+                    "text": "The Green Mile",
+                    "selected": 0
+                },
+                {
+                    "text": "A Time to Kill",
+                    "selected": 0
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "attempts": 1,
+            "correctAnswers": 0,
+            "incorrectAnswers": 1,
+            "answers": [
+                {
+                    "text": "Ryan Reynolds",
+                    "selected": 0
+                },
+                {
+                    "text": "Hugh Jackman",
+                    "selected": 1
+                },
+                {
+                    "text": "Chris Evans",
+                    "selected": 0
+                },
+                {
+                    "text": "Tom Hardy",
+                    "selected": 0
+                }
+            ]
+        }
+    ]
+}
