@@ -8,7 +8,8 @@ const jsonQuestions = require('./data/questions.json');
 const e = require('express');
 
 const app = express();
-const port = 3000;
+const port = 3000; //development
+// const port = 21277; //production
 
 app.use(express.json());
 app.use(cors());

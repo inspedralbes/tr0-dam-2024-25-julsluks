@@ -1,4 +1,5 @@
-const URL = 'http://localhost:3000';
+const URL = 'http://localhost:3000'; //development
+// const URL = 'http://tr0.a22betvilver.dam.inspedralbes.cat:21277'; //production
 
 //Read all (OKAY)
 export async function findAllQuestions() {
